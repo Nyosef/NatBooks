@@ -1,0 +1,37 @@
+<h1>Public Stories</h1>
+<div class="row">
+
+{{#each stories}}
+
+    <div class="col s12 m4">
+        <div class="card">
+            <div class="card-image">
+                <!–– First "user" is the stories user(were in the stories loop) , next one is the loged in user. We need the one outside the loop. To access it within the loop, i do ../user, thus we go up one level and thats the logged in user.––> 
+                <!-- We have to use tripple brackets in order to parse this, if we want to parse html using handlebars, must use triple brackets -->
+                {{{editIcon user ../user _id}}}
+                   <!–– Icon if this story belongs to user that is logged in -->
+            </div>
+
+                <div class="card-content center-align">
+                    <h5>{{title}}</h5>
+                    <!–– This is how we apply the striptags and truncate helpers - for truncate first param is body second 150 length ––> 
+                    <p>{{stripTags ( truncate body 150)}}</p>
+                    <br>
+                    <div class="chip">
+                        <img src="{{user.image}}" alt="">
+                        <a href="/stories/user/{{user._id}}">{{user.displayName}}</a>
+                    </div>
+                </div>
+                <div class="card-action center-align">
+                    <a href="/stories/{{_id}}" class="btn grey">Read More</a>
+                </div>
+        </div>
+    </div>
+
+{{else}}
+
+        <p>No stories to display</p>
+
+{{/each}}
+
+</div>
